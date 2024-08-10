@@ -1,0 +1,671 @@
+Day Two => Function
+
+
+Abstraction level correct => High => Medium => Low
+Reading Code from Top to Bottom:
+
+
+
+SOLID PRINCIPLE
+
+S => Single Responsible
+O => Open Close Principle
+	Open for extension => need to open for code update 
+	Close for modification => When you updated new code, you don’t need to touch source code.
+
+	
+
+if/switch-> polymorphism?
+
+Function Argument => One Two is OK. But Three or higher must be avoid.
+
+If multiple Argument  need to change => Parameter ObjectFor eg,
+
+PaymentRequest(FromAcc,ToAcc,Amount).  
+
+
+		=>
+
+
+PaymentRequest(PayObj obj)
+
+
+
+Class PayObj{
+
+StringFromAcc;
+StringToAcc;
+Long Amount;
+
+}
+
+
+Exception can work only synchronous code NOT asynchronous code.
+
+
+
+=============================================================================>
+
+
+		
+OOP Concept To make OOP Concept you should need 3 points.
+
+1.Encapsulation 
+2.Inheritance3.Polymorphism 
+
+
+
+You should know 1 of OOP Concept about Encapsulation.This is …… 	Program To Interface NOT To Implementation
+
+
+This is Good for maintenance.
+
+
+
+Another important OOP Concept
+
+
+****Open For Extension Close For Modification
+
+
+
+In programming, Doctor and Engineer are same taxonomy.
+
+But Airplane and Bird are not same Taxonomy.
+
+
+****So,What is difference between Abstract and Interface in Java?
+
+If your classes are same taxonomy, you should use Abstract and inheritance.But no same taxonomy, you should use Interface and subTyping.
+
+
+
+***** To make Polymorphic Operation in Static Programming Language,You must be use SubTyping.
+
+
+
+=============================================================================>
+
+OOP Concept 2
+
+
+If you use code reuse, you should use code composition instead of inheritance.Because more inheritance, more classes dependency.
+
+
+Example of Composition	
+
+public class Engine {
+    private String type;
+
+    public Engine(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void start() {
+        System.out.println("Engine started: " + type);
+    }
+}
+
+
+
+public class Car {
+    private Engine engine;
+    private String model;
+
+    public Car(String model, Engine engine) {
+        this.model = model;
+        this.engine = engine;
+    }
+
+    public void startCar() {
+        System.out.println("Car model: " + model);
+        engine.start();
+    }
+}public class Main {
+    public static void main(String[] args) {
+        Engine myEngine = new Engine("V8");
+        Car myCar = new Car("Mustang", myEngine);
+
+        myCar.startCar();
+    }
+}
+
+
+=============================================================================>
+
+
+OOP Concept 3
+
+
+Example of Inheritance
+
+package OOP_Inheritance;
+
+// Car.java
+public class Car {
+    private String make;
+    private String model;
+    private Engine engine; // Composition with Engine
+
+    // Constructor
+    public Car(String make, String model, Engine engine) {
+        this.make = make;
+        this.model = model;
+        this.engine = engine;
+    }
+
+    // Getter for make
+    public String getMake() {
+        return make;
+    }
+
+    // Getter for model
+    public String getModel() {
+        return model;
+    }
+
+    // Getter for engine
+    public Engine getEngine() {
+        return engine;
+    }
+
+    // Method to start the car
+    public void startCar() {
+        System.out.println("Starting car: " + make + " " + model);
+        engine.start(); // Call the engine's start method
+    }
+}
+
+package OOP_Inheritance;
+
+// ElectricCar.java
+public class ElectricCar extends Car {
+    private int batteryCapacity; // Specific to ElectricCar
+
+    // Constructor
+    public ElectricCar(String make, String model, Engine engine, int batteryCapacity) {
+       super(make, model, engine); // Calling the superclass constructor
+        this.batteryCapacity = batteryCapacity;
+    }
+
+    // Overriding the startCar method
+    @Override
+    public void startCar() {
+        System.out.println("Starting electric car: " + getMake() + " " + getModel());
+        System.out.println("Battery capacity: " + batteryCapacity + " kWh");
+        getEngine().start(); // Using the inherited engine's start method
+    }
+
+    // Getter for battery capacity
+    public int getBatteryCapacity() {
+        return batteryCapacity;
+    }
+}
+
+package OOP_Inheritance;
+
+
+// Engine.java
+public class Engine {
+    private String type;
+    private int horsepower;
+
+    // Constructor
+    public Engine(String type, int horsepower) {
+        this.type = type;
+        this.horsepower = horsepower;
+    }
+
+    // Method to start the engine
+    public void start() {
+        System.out.println("Engine started: " + type + " with " + horsepower + " horsepower.");
+    }
+
+    // Getter for type
+    public String getType() {
+        return type;
+    }
+
+    // Getter for horsepower
+    public int getHorsepower() {
+        return horsepower;
+    }
+}
+
+package OOP_Inheritance;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create an engine for a regular car
+        Engine petrolEngine = new Engine("Petrol", 150);
+
+        // Create a regular car with a petrol engine
+        Car regularCar = new Car("Toyota", "Camry", petrolEngine);
+
+        // Start the regular car
+        regularCar.startCar();
+
+        System.out.println();
+
+        // Create an engine for an electric car
+        Engine electricEngine = new Engine("Electric", 300);
+
+        // Create an electric car with an electric engine
+        ElectricCar tesla = new ElectricCar("Tesla", "Model S", electricEngine, 100);
+
+        // Start the electric car
+        tesla.startCar();
+    }
+}
+
+Output
+
+Starting car: Toyota Camry
+Engine started: Petrol with 150 horsepower.
+
+Starting electric car: Tesla Model S
+Battery capacity: 100 kWh
+Engine started: Electric with 300 horsepower.
+
+
+=============================================================================>
+
+
+OOP Concept 4
+
+
+
+Classical Inheritance Vs Prototype Inheritance 
+
+
+
+There are 2 types of inheritance in programming.
+
+
+Classical Inheritanceclass Base { 
+	int baseData; 
+} 
+class Child extends Base {
+ int childData; 
+} 
+
+if you use like this, Child class has 2 of data.Own data and Parent data. This is called Classical Inheritance.
+
+
+
+
+Prototype Inheritance
+
+function Base() 
+this.baseData = [];
+}function Child(){this.childData = "childdata";}Child.prototype = new Base();//set up inheritance 
+var c1 = new Child();();var c2 = new Child();();c1.baseData.push(100); .baseData.push(100); console.log(.log(c2.baseData); 
+
+
+
+
+Output
+
+C2 = 100
+
+Prototypical inheritance is share semantic.For Example,
+
+If you add/minus on Parent object, it can effect on child classes.
+
+
+
+=============================================================================>
+
+OOP Concept 5
+
+
+Polymorphism 
+
+Poly(အများကြီး)  morphism(ပုံသဏ္ဍာန်ပြောင်း)
+
+Polymorphism is the ability to present the same interface for differing underlying forms (data types). 
+
+
+For Example,
+
+Teacher’s work is teaching.Doctor’s work is medical treatment.
+
+But Work is same.
+
+So, we can use Work is a Polymorphism.
+
+
+class Human{public void work() {} 
+} 
+class Teacher extends Human {public void work(){ 
+System.out.println("I teach tutorial"); } 
+} 
+class Doctor extends Human {public void work(){ 
+System.out.println("I give medical treatment"); }}class Test 
+{public static void main(String args[]) {Human h = new Teacher(); 
+h.work(); 
+h = new Doctor(); 
+h.work();}}
+
+
+Why we use polymorphism????
+
+We don’t need to write hard code. For example,
+
+Obj is teacher, we don’t call teacher work.
+
+
+In future,If we add Engineer class,don’t need to touch the original code.
+
+
+
+
+=============================================================================>
+
+Day -8  OOP & Principle-1
+
+
+1.You should not use like this.
+import.java.Math.*;
+Because it is performance decrease for compile time.
+So, you should import only needed statement.
+
+
+2.Test must be safety thing. 
+Test Case must be sufficient not insufficient
+For example
+ if(){
+    //code coverage Test must be here and 
+} else{    
+    
+    //   here.}
+
+
+3.Paradigm
+    OOP       
+    FP
+Type
+    Static typed Language
+    Java,C,Go,C#        
+    int a = 10      
+
+    *****Adv: More useful for Refactoring,Complex,Enterprise Project  
+
+    Dynamically typed Language            
+    JS,PHP,Ruby            
+    let a = 10;         
+    a = ‘apple’;
+
+
+    But Typescript => static originally      
+    But any keyword contains, it will become FP
+
+
+    Optional Type => just type checking not Paradigm
+
+
+
+    ***Polymorphism is prominent in Static Languages.
+    ***Everything  is polymorphism in Dynamic Languages.
+    *** Some of language supports multiple Paradigm.
+
+
+
+4. We called open public methods of a class are called interface.
+
+   public method -> interface 
+
+
+=============================================================================>
+
+
+Day -9  OOP & Principle-2
+
+
+
+Composition Over Inheritance
+
+
+Class Car{
+	Deep deep;
+
+}
+
+Why inheritance does not use???
+
+1. Violate encapsulation
+    class Teacher extends Human{
+
+    }
+
+
+
+
+Which situation we should use Abstract???
+
+For example,
+				
+				Requirements
+				
+
+		drawing
+				Shape
+					Circle
+					Rectangle
+					
+
+
+
+PolyDemo
+
+
+		Shape shape = new Circle();
+		shape.draw();
+		
+		shape = new Rectangle();
+		shape.draw();
+
+
+
+Same Code different implementation
+
+
+This is called Polymorphism.
+
+
+
+What is benefits for polymorphism????
+
+
+	POWER OF POLYMORPHISM ——> Easy to Extend, Easy to Maintenance
+
+	********It can solve for OCP. Principle.
+
+
+
+	Any software can make changes.
+
+	*****************But easy to extend power come from inheritance and polymorphism.
+
+
+
+	Dependency Inversion + Polymorphism + Inheritance = OCP Problem
+
+
+
+************OCP means Open Close Principle.
+
+
+
+
+
+Polymorphic method must be override.
+
+
+
+Abstract means by force. Child classes are must be implemented override class.
+So, WE NEED TO DEFINE ABSTRACT.
+
+
+
+Abstract communication is 2 ways. 
+
+******Parent To Child.
+******Child To Parent.
+
+===============================================================================================>
+
+
+Interface
+
+
+Abstract 
+		abstract method
+
+Interface 
+		method
+
+
+
+*********************In programming, Doctor and Engineer are same taxonomy.
+
+But Airplane and Bird are not same Taxonomy.
+
+
+****So,What is difference between Abstract and Interface in Java?
+
+If your classes are same taxonomy, you should use Abstract and inheritance.But no same taxonomy, you should use Interface and subTyping.
+
+
+
+
+
+Program To Interface NOT IMPLEMENTATION
+
+ ****Easy to Switch
+**** Test
+**** Easy to Mock Good For Unit Testing 
+
+
+
+
+Why We should use Interface instead of Abstract
+
+1.Abstract is using inheritance  so inheritance problems will cause.Eg.Encapsulation violation,
+
+Abstract can use data but interface can only use Methods hide implementation already protected encapsulation . 
+
+
+
+INTERFACE POWER 
+
+
+Interface can only use Methods hide implementation already protected encapsulation .
+
+
+
+============================================================================================>
+
+OOP Concept 6
+
+
+What is Coupling?
+
+For example,
+
+		Class A depends on Class B,C,D for its responsibility.
+		Class A cannot do its work  without having class B,C,D.
+		It is Coupling.
+
+Less Coupling is more good.
+
+
+
+Coupling has 2 types.
+
+Strong Coupling Vs  Loose Coupling
+
+
+Strong Coupling means  
+
+For example,
+
+		Class A can use  not only Class B’s public interface(public method) 
+		but also fields, variables.
+
+In this situation, It is called Strong coupling.
+
+It is bad for Code maintenance.
+
+IF class B change data, Class A will change in trouble.
+
+
+
+Loose Coupling means  
+
+		Class A can use  Class B’s public interface(public method) 
+		NOT variables and fields.
+
+In this situation, It is called Loose coupling.
+
+
+
+Cohesion
+
+	It means not use other class’s fields and methods.
+	Solved By itself.
+
+**** LESS DEPENDS ON OTHER CLASS.
+
+
+
+============================================================================================>
+
+Day -10  OOP & Principle-3
+
+
+
+
+To make a software these stages consists.
+
+	Architecture
+		Design
+			Design Pattern
+				principle
+					Clean Code
+
+
+
+============================================================================================>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
