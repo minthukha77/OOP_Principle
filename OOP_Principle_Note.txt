@@ -393,10 +393,10 @@ Type
     Java,C,Go,C#        
     int a = 10      
 
-    *****Adv: More useful for Refactoring,Complex,Enterprise Project  
+    *****Adv: More useful for Refactoring,Complex,Enterprise Project 
 
     Dynamically typed Language            
-    JS,PHP,Ruby            
+    JS,PHP,Ruby           
     let a = 10;         
     a = ‘apple’;
 
@@ -417,7 +417,7 @@ Type
 
 4. We called open public methods of a class are called interface.
 
-   public method -> interface 
+   public method -> interface
 
 
 =============================================================================>
@@ -557,7 +557,7 @@ Why We should use Interface instead of Abstract
 
 1.Abstract is using inheritance  so inheritance problems will cause.Eg.Encapsulation violation,
 
-Abstract can use data but interface can only use Methods hide implementation already protected encapsulation . 
+Abstract can use data but interface can only use Methods hide implementation already protected encapsulation .
 
 
 
